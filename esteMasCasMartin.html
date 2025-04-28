@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odpočítavanie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .countdown {
+            font-size: 2.5rem;
+            background: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="title">Martin, ešte si to rozmysli, máš na to už len :</div>
+<div class="countdown" id="countdown">Načítavam...</div>
+
+<script>
+    const countdownElement = document.getElementById('countdown');
+
+    // Nastav správny cieľový dátum (rok, mesiac (0 = január), deň, hodina, minúta, sekunda)
+    const targetDate = new Date(2025, 4, 3, 15, 0, 0); // Pozor: mesiac je 0-indexovaný (4 = máj)
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate.getTime() - now.getTime();
+
+        if (diff <= 0) {
+            countdownElement.innerHTML = "Tak ci treba ty kokot!";
+            clearInterval(interval);
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownElement.innerHTML = `
+            ${days} dní ${hours.toString().padStart(2, '0')} hodín 
+            ${minutes.toString().padStart(2, '0')} minút 
+            ${seconds.toString().padStart(2, '0')} sekúnd
+        `;
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
