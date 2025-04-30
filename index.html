@@ -41,6 +41,46 @@
 </head>
 <body>
 
-<div class="video-container" id="video-container">
+<div class="video-container">
   <iframe 
-    src="https://www.youtube.com/embed/videoseries?list=PLnOTYz8s8JqPM-pAyoV8vzt
+    src="https://www.youtube.com/embed/videoseries?list=PLnOTYz8s8JqPM-pAyoV8vzt6ZmyVbVVjN" 
+    width="560" height="315" 
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+  </iframe>
+</div>
+
+<div class="title">Martin, ešte si to rozmysli, máš na to už len :</div>
+<div class="countdown" id="countdown">Načítavam...</div>
+
+<script>
+  const countdownElement = document.getElementById('countdown');
+  const targetDate = new Date(2025, 4, 3, 15, 0, 0); // 3. máj 2025 15:00
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate.getTime() - now.getTime();
+
+    if (diff <= 0) {
+      countdownElement.innerHTML = "TAK CI TREBA TY KOKOT!";
+      clearInterval(interval);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    countdownElement.innerHTML = 
+      ${days} dní ${hours.toString().padStart(2, '0')} hodín 
+      ${minutes.toString().padStart(2, '0')} minút 
+      ${seconds.toString().padStart(2, '0')} sekúnd
+    ;
+  }
+
+  updateCountdown();
+  const interval = setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
