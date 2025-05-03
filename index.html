@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ešte máš čas Marin</title>
+  <title>Martin už nemáš moc času</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -121,7 +121,7 @@
   <div class="main">
     <div class="video-container">
       <iframe 
-        src="https://www.youtube.com/embed/Fz4ggXXNaA0" 
+        src="https://www.youtube.com/watch?v=OTcEp4xZFkU" 
         allow="autoplay; encrypted-media" allowfullscreen>
       </iframe>
     </div>
@@ -136,18 +136,42 @@
 
 <script>
   const countdownElement = document.getElementById('countdown');
-  const targetDate = new Date(2025, 4, 3, 15, 30, 0); // 3. máj 2025 15:30
+  const targetDate = new Date(2025, 4, 3, 8, 0, 0); // 3. máj 2025 08:00
 
   function updateCountdown() {
     const now = new Date();
     const diff = targetDate.getTime() - now.getTime();
 
     if (diff <= 0) {
-      countdownElement.innerHTML = "Vážené smútočné zhromaždenie, dnes sa neveky ľúčime s Martinovou slobodou...";
+      countdownElement.innerHTML = "Vážené smútočné zhromaždenie, dnes sa naveky lúčime s Martinovou slobodou...";
       clearInterval(interval);
 
+      // Zmena videa
       const mainDiv = document.querySelector('.video-container');
       mainDiv.innerHTML = '<iframe src="https://www.youtube.com/embed/9lQGn4r_jJE?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+
+      // Odstránenie básne
+      const poemDiv = document.querySelector('.poem');
+      if (poemDiv) {
+        poemDiv.remove();
+      }
+
+      // Odstránenie textov o ceste k svätosti
+      const footerTexts = document.querySelectorAll('.footer-text');
+      footerTexts.forEach(el => el.remove());
+
+      // Doplnkový text pod video
+      const message = document.createElement('div');
+      message.textContent = "A už si to nikdy nerozmysli a cti svoju prísahu!";
+      message.style.marginTop = '20px';
+      message.style.fontSize = '1.2rem';
+      message.style.fontWeight = 'bold';
+      message.style.fontStyle = 'italic';
+      mainDiv.parentNode.insertBefore(message, mainDiv.nextSibling);
+
+      // Zmena farieb
+      document.body.style.backgroundColor = "#000000";
+      document.body.style.color = "#ffffff";
 
       return;
     }
@@ -167,6 +191,7 @@
   updateCountdown();
   const interval = setInterval(updateCountdown, 1000);
 </script>
+
 
 </body>
 </html>
